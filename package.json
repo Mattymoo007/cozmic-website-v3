@@ -5,18 +5,36 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "contentful-typescript-codegen": "contentful-typescript-codegen --output ./types/contentful.d.ts"
   },
   "dependencies": {
+    "@contentful/rich-text-react-renderer": "^15.6.2",
+    "@tailwindcss/forms": "^0.3.4",
+    "contentful": "^9.1.4",
     "next": "12.0.3",
+    "next-pwa": "^5.4.0",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-hook-form": "^7.20.1",
+    "react-markdown": "^7.1.0",
+    "react-transition-group": "^4.4.2",
+    "sass": "^1.43.4"
   },
   "devDependencies": {
     "@types/node": "16.11.7",
     "@types/react": "17.0.34",
+    "@types/react-transition-group": "^4.4.4",
+    "autoprefixer": "^10.4.0",
+    "contentful-management": "^7.45.2",
+    "contentful-typescript-codegen": "^3.2.3",
+    "dotenv": "^10.0.0",
     "eslint": "7",
     "eslint-config-next": "12.0.3",
+    "next-sitemap": "^1.6.203",
+    "postcss": "^8.3.11",
+    "prettier": "^2.4.1",
+    "tailwindcss": "^2.2.19",
     "typescript": "4.4.4"
   }
 }
