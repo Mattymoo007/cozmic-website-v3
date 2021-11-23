@@ -24,7 +24,7 @@ const variants = {
   hide: { opacity: 0, x: -100 },
 }
 
-const encode = (data: {}) => {
+const encode = (data: { [key: string]: string }) => {
   return Object.keys(data)
     .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
     .join("&")
