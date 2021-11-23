@@ -24,17 +24,26 @@ const variants = {
   hide: { opacity: 0, x: -100 },
 }
 
+const encode = (data: {}) => {
+  return Object.keys(data)
+    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+    .join("&")
+}
+
 const ContactPage: NextPage<{ text: string }> = ({ text }) => {
   const [isSent, setIsSent] = useState(false)
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>()
+  const { register, handleSubmit } = useForm<FormData>()
 
-  const onSubmit = handleSubmit(() => {
-    console.log(errors)
+  const onSubmit = handleSubmit(data => {
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({
+        "form-name": "contact",
+        ...data,
+      }),
+    }).catch(error => alert(error))
 
     setIsSent(true)
   })
@@ -50,9 +59,6 @@ const ContactPage: NextPage<{ text: string }> = ({ text }) => {
         onSubmit={onSubmit}
         className="form w-full lg:w-1/2"
         data-netlify="true"
-        action="/contact"
-        name="contact"
-        method="post"
         netlify-honeypot="bot-field"
       >
         <input type="hidden" name="form-name" value="contact" />
