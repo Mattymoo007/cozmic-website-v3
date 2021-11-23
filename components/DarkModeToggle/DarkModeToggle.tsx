@@ -1,20 +1,13 @@
-import React, { useState } from "react"
-import { setColorScheme } from "~/utils/color-scheme"
+import React, { useContext } from "react"
+import { ThemeContext } from "~/layouts/Layout"
 
 const DarkModeToggle = () => {
-  const [isDark, setIsDark] = useState(false)
-
-  const toggleIsDark = () => {
-    setColorScheme(isDark)
-    setIsDark(!isDark)
-  }
+  const { isDark, toggleTheme } = useContext(ThemeContext)
 
   return (
-    <>
-      <span onClick={toggleIsDark} className='morphic-btn rounded-full h-8 w-8'>
-        {isDark ? "🌒" : "☀️"}
-      </span>
-    </>
+    <span onClick={toggleTheme} className="morphic-btn rounded-full h-8 w-8">
+      {!isDark ? "🌒" : "☀️"}
+    </span>
   )
 }
 

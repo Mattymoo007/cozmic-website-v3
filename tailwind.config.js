@@ -1,4 +1,5 @@
 module.exports = {
+  mode: "jit",
   purge: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
@@ -26,8 +27,9 @@ module.exports = {
       xl: "1280px",
     },
     extend: {
-      colors: {
-        "light-grey": "#f5f6f7",
+      boxShadow: {
+        "morphic-inner":
+          "inset 5px 5px 6px #898f9a,inset -5px -5px 6px #afb7c4",
       },
     },
   },

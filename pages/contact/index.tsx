@@ -1,7 +1,8 @@
+import { motion } from "framer-motion"
 import { GetStaticProps, NextPage } from "next"
+import { useState } from "react"
 import { useForm } from "react-hook-form"
 import ReactMarkdown from "react-markdown"
-import { ITextFields } from "~/types/contentful"
 import { contentful } from "~/utils/contentful-api"
 
 type FormData = {
@@ -11,24 +12,59 @@ type FormData = {
   message: string
 }
 
+const variants = {
+  initial: {
+    opacity: 0,
+  },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.2, type: "spring", stiffness: 500 },
+  },
+  hide: { opacity: 0, x: -100 },
+}
+
 const ContactPage: NextPage<{ text: string }> = ({ text }) => {
+  const [isSent, setIsSent] = useState(false)
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>()
 
-  const onSubmit = handleSubmit(data => console.log(data))
+  const onSubmit = handleSubmit(() => {
+    console.log(errors)
 
-  console.log(text)
+    setIsSent(true)
+  })
 
   return (
-    <section
-      className="container flex flex-wrap items-center"
-      style={{ height: "500px" }}
+    <motion.section
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="container flex flex-wrap items-center justify-center"
     >
-      <form onSubmit={onSubmit} className="form w-full lg:w-1/2">
-        <h2 className="text-2xl font-bold mb-4">Hola @ me</h2>
+      <form
+        onSubmit={onSubmit}
+        className="form w-full lg:w-1/2"
+        data-netlify="true"
+        action="/contact"
+        name="contact"
+        method="post"
+        netlify-honeypot="bot-field"
+      >
+        <input type="hidden" name="form-name" value="contact" />
+
+        <p hidden>
+          <label>
+            Don’t fill this out: <input name="bot-field" />
+          </label>
+        </p>
+
+        <h2 className="text-2xl font-bold mb-4 dark:text-white">Hola @ me</h2>
+
         <div className="form-row">
           <label className="w-full lg:w-1/2">
             First Name
@@ -70,19 +106,30 @@ const ContactPage: NextPage<{ text: string }> = ({ text }) => {
           </label>
         </div>
 
-        <input
-          type="submit"
-          value="Send 👋"
-          className="morphic-btn mt-2 font-mono"
-        />
+        <div className="flex items-center mt-2">
+          <input
+            type="submit"
+            value="Send 👋"
+            className="morphic-btn py-2 px-3 rounded-md font-mono dark:text-white z-10"
+          />
+
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={isSent ? "show" : "hide"}
+            variants={variants}
+            className="text-sm text-gray-500 dark:text-white font-mono ml-5"
+          >
+            Message sent!😊
+          </motion.span>
+        </div>
       </form>
 
-      <div className="w-1/2 flex items-center justify-center">
-        <ReactMarkdown className="markdown-content morphic-shadow py-5 px-7 rounded-md">
+      <div className="lg:w-1/2 mt-5 flex items-center justify-center w-full">
+        <ReactMarkdown className="markdown-content morphic-shadow py-5 px-7 rounded-md w-full lg:w-auto">
           {text ? text : ""}
         </ReactMarkdown>
       </div>
-    </section>
+    </motion.section>
   )
 }
 

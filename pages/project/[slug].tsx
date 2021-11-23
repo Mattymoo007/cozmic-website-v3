@@ -5,6 +5,7 @@ import { contentful } from "~/utils/contentful-api"
 import Image from "next/image"
 import { BLOCKS } from "@contentful/rich-text-types"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
+import { motion } from "framer-motion"
 
 const Project: FC<IProjectFields> = props => {
   const { copy } = props
@@ -28,9 +29,14 @@ const Project: FC<IProjectFields> = props => {
   }
 
   return (
-    <article className="container relative lg:w-1/2 rich-text-content">
+    <motion.article
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="container relative lg:w-1/2 rich-text-content"
+    >
       {copy && documentToReactComponents(copy, renderOptions)}
-    </article>
+    </motion.article>
   )
 }
 

@@ -11,7 +11,7 @@ const CategoryNav: FC<{ categories: string[]; filterProjects: Function }> = ({
           return (
             <li
               key={category}
-              className="morphic-btn mb-4 px-3 py-2 rounded text-sm mx-2 md:mx-4 md:mb-0 font-mono text-gray-700"
+              className="morphic-btn mb-4 px-3 py-2 rounded text-sm mx-2 md:mx-4 md:mb-0 font-mono text-gray-700 dark:text-white dark:bg-gray-700"
               onClick={() => filterProjects(category)}
             >
               {category}

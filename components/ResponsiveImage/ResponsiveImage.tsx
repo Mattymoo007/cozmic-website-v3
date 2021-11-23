@@ -14,6 +14,7 @@ const ResponsiveImage: FC<{ image: Asset | undefined }> = ({ image }) => {
       width={dimensions?.width}
       height={dimensions?.height}
       alt={title}
+      className="z-10"
     />
   )
 }

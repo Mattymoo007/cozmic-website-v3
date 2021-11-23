@@ -5,6 +5,7 @@ import { IText } from "~/types/contentful"
 import { contentful } from "~/utils/contentful-api"
 import Image from "next/image"
 import { GetStaticProps, NextPage } from "next"
+import { motion } from "framer-motion"
 
 const AboutPage: NextPage<{ image: Asset; text: IText }> = ({
   image,
@@ -24,7 +25,12 @@ const AboutPage: NextPage<{ image: Asset; text: IText }> = ({
   } = image
 
   return (
-    <div className="container lg:w-1/2 relative">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="container lg:w-1/2 relative"
+    >
       <div className="markdown-image">
         <Image
           src={`https:${url}`}
@@ -38,7 +44,7 @@ const AboutPage: NextPage<{ image: Asset; text: IText }> = ({
       <ReactMarkdown className="markdown-content">
         {content ? content : ""}
       </ReactMarkdown>
-    </div>
+    </motion.div>
   )
 }
 

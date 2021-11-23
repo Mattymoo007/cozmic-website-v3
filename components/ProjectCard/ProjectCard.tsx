@@ -11,17 +11,17 @@ const ProjectCard: FC<IProjectFields> = ({
   tags,
 }) => {
   return (
-    <Link href={slug ? `project/${slug}` : ""}>
-      <a className="project-card relative inline-block mb-3 rounded morphic-shadow  transition-shadow  overflow-hidden">
+    <Link href={slug ? `/project/${slug}` : ""}>
+      <a className="project-card relative inline-block mb-3 rounded-lg morphic-shadow overflow-hidden dark:bg-gray-700 mt-2">
         <ResponsiveImage image={thumbnail} />
-        <div className="p-5">
+        <div className="p-5 dark:text-white">
           <ReactMarkdown>{introduction ? introduction : ""}</ReactMarkdown>
           <div className="project-tags flex flex-wrap mt-3">
             {tags &&
               tags.map(tag => (
                 <span
                   key={tag}
-                  className="text-gray-600 tag text-xs px-3 py-1 mr-2 mb-2 whitespace-nowrap border-gradient border-gradient-purple"
+                  className="text-gray-600 tag text-xs px-3 py-1 mr-2 mb-2 whitespace-nowrap border-gradient border-gradient-purple dark:text-gray-100"
                 >
                   # {tag}
                 </span>

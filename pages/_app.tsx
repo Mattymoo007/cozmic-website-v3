@@ -1,18 +1,14 @@
-import "~/styles/index.scss"
+import "~/styles/index.css"
 
 import type { AppProps } from "next/app"
 import Layout from "~/layouts/Layout"
-import { useEffect } from "react"
-import { initColorScheme } from "~/utils/color-scheme"
+
+import { AnimatePresence } from "framer-motion"
 import Script from "next/script"
 
-function MyApp({ Component, pageProps }: AppProps) {
-  useEffect(() => {
-    initColorScheme()
-  }, [])
-
+function MyApp({ Component, pageProps, router }: AppProps) {
   return (
-    <Layout>
+    <>
       {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-9DJT5QK59S"
@@ -28,8 +24,12 @@ function MyApp({ Component, pageProps }: AppProps) {
         `}
       </Script>
 
-      <Component {...pageProps} />
-    </Layout>
+      <Layout>
+        <AnimatePresence exitBeforeEnter>
+          <Component {...pageProps} key={router.route} />
+        </AnimatePresence>
+      </Layout>
+    </>
   )
 }
 
