@@ -2,6 +2,7 @@ import "~/styles/index.css"
 
 import type { AppProps } from "next/app"
 import Layout from "~/layouts/Layout"
+import { DefaultSeo } from "next-seo"
 
 import { AnimatePresence } from "framer-motion"
 import Script from "next/script"
@@ -23,6 +24,16 @@ function MyApp({ Component, pageProps, router }: AppProps) {
           gtag('config', 'G-9DJT5QK59S');
         `}
       </Script>
+
+      <DefaultSeo
+        title="Cozmic Creatives"
+        description="Portfolio Matthew Bracke"
+        twitter={{
+          handle: "@CozmicMatt",
+          site: "https://twitter.com/CozmicMatt",
+          cardType: "summary_large_image",
+        }}
+      />
 
       <Layout>
         <AnimatePresence exitBeforeEnter>

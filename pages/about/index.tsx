@@ -1,11 +1,12 @@
 import { Asset } from "contentful"
-import React, { FC } from "react"
+import React from "react"
 import ReactMarkdown from "react-markdown"
 import { IText } from "~/types/contentful"
 import { contentful } from "~/utils/contentful-api"
 import Image from "next/image"
 import { GetStaticProps, NextPage } from "next"
 import { motion } from "framer-motion"
+import { NextSeo } from "next-seo"
 
 const AboutPage: NextPage<{ image: Asset; text: IText }> = ({
   image,
@@ -25,26 +26,29 @@ const AboutPage: NextPage<{ image: Asset; text: IText }> = ({
   } = image
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="container lg:w-1/2 relative"
-    >
-      <div className="markdown-image">
-        <Image
-          src={`https:${url}`}
-          layout="responsive"
-          alt={title}
-          height={cfImage?.height}
-          width={cfImage?.width}
-        />
-      </div>
+    <>
+      <NextSeo title="Cozmic Creatives | Contact" />
 
-      <ReactMarkdown className="markdown-content">
-        {content ? content : ""}
-      </ReactMarkdown>
-    </motion.div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="container lg:w-1/2 relative"
+      >
+        <div className="markdown-image">
+          <Image
+            src={`https:${url}`}
+            layout="responsive"
+            alt={title}
+            height={cfImage?.height}
+            width={cfImage?.width}
+          />
+        </div>
+        <ReactMarkdown className="markdown-content">
+          {content ? content : ""}
+        </ReactMarkdown>
+      </motion.div>
+    </>
   )
 }
 
