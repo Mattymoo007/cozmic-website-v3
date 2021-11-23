@@ -21,7 +21,7 @@ const ProjectCard: FC<IProjectFields> = ({
               tags.map(tag => (
                 <span
                   key={tag}
-                  className="text-gray-600 tag text-xs px-3 py-1 mr-2 mb-2 whitespace-nowrap border-gradient border-gradient-purple dark:text-gray-100"
+                  className="text-gray-600 tag text-xs px-3 py-1 mr-2 mb-2 border border-purple-500 whitespace-nowrap dark:text-gray-100 rounded-full"
                 >
                   # {tag}
                 </span>
