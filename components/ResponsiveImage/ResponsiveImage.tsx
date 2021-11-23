@@ -9,7 +9,7 @@ const ResponsiveImage: FC<{ image: Asset | undefined }> = ({ image }) => {
 
   return (
     <Image
-      src={`https://${url}`}
+      src={`https:${url}`}
       layout="responsive"
       width={dimensions?.width}
       height={dimensions?.height}

@@ -3,7 +3,6 @@
 const withPWA = require("next-pwa")
 
 module.exports = withPWA({
-  target: "serverless",
   reactStrictMode: true,
   images: {
     domains: ["images.ctfassets.net", "images.contentful.com"],
