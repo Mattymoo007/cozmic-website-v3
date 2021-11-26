@@ -13,6 +13,10 @@ const Project: FC<IProjectFields> = props => {
   const renderOptions = {
     renderNode: {
       [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
+        const isPriority = node.data.target.metadata.tags.some(
+          ({ sys: { id } }: any) => id.includes("priority")
+        )
+
         return (
           <div className="markdown-image">
             <Image
@@ -21,6 +25,7 @@ const Project: FC<IProjectFields> = props => {
               width={node.data.target.fields.file.details.image.width}
               alt={node.data.target.fields.description}
               layout="responsive"
+              priority={isPriority}
             />
           </div>
         )
