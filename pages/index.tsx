@@ -1,10 +1,9 @@
 import type { GetStaticProps, NextPage } from "next"
-import Head from "next/head"
-import CategoryNav from "~/components/CategoryNav/CategoryNav"
+import CategoryNav from "~/components/CategoryNav"
 import { IProject, IProjectFields } from "~/types/contentful"
 import { contentful } from "~/utils/contentful-api"
 
-import ProjectCard from "~/components/ProjectCard/ProjectCard"
+import ProjectCard from "~/components/ProjectCard"
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { fadeInUp } from "~/utils/framer-animations"
@@ -51,7 +50,10 @@ const Home: NextPage<{ projects: IProjectFields[] }> = ({ projects }) => {
       >
         <CategoryNav categories={categories} filterProjects={filterProjects} />
 
-        <motion.section variants={stagger} className="masonry-columns-4 mt-10">
+        <motion.section
+          variants={stagger}
+          className="gap-7 mt-10 md:columns-2 lg:columns-4"
+        >
           {filteredProjects.map((project, index) => (
             <motion.div variants={fadeInUp} key={index}>
               <ProjectCard key={project.title} {...project} />
@@ -63,7 +65,7 @@ const Home: NextPage<{ projects: IProjectFields[] }> = ({ projects }) => {
   )
 }
 
-export const getStaticProps: GetStaticProps = async context => {
+export const getStaticProps: GetStaticProps = async () => {
   const projectArrId = "1449rrFKe0Ev87UCAjAziH"
   const {
     fields: { items },

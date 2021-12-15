@@ -1,6 +1,5 @@
 module.exports = {
-  mode: "jit",
-  purge: [
+  content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
     "./layouts/**/*.{js,ts,jsx,tsx}",
@@ -8,9 +7,10 @@ module.exports = {
   darkMode: "class",
   theme: {
     fontFamily: {
-      merriweather: ["Merriweather", "serif"],
+      titillium: ["Titillium Web", "serif"],
       montserrat: ["Montserrat", "sans-serif"],
       roboto: ["Roboto", "sans-serif"],
+      inter: ["Inter", "sans-serif"],
       mono: ["Roboto Mono", "monospace"],
     },
     container: {
@@ -26,15 +26,7 @@ module.exports = {
       lg: "1024px",
       xl: "1280px",
     },
-    extend: {
-      boxShadow: {
-        "morphic-inner":
-          "inset 5px 5px 6px #898f9a,inset -5px -5px 6px #afb7c4",
-      },
-    },
   },
-  variants: {
-    extend: {},
-  },
+
   plugins: [require("@tailwindcss/forms")],
 }

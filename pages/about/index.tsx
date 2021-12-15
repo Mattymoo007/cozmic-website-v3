@@ -1,12 +1,12 @@
 import { Asset } from "contentful"
 import React from "react"
-import ReactMarkdown from "react-markdown"
 import { IText } from "~/types/contentful"
 import { contentful } from "~/utils/contentful-api"
 import Image from "next/image"
 import { GetStaticProps, NextPage } from "next"
 import { motion } from "framer-motion"
 import { NextSeo } from "next-seo"
+import MarkdownRenderer from "~/components/MarkdownRenderer"
 
 const AboutPage: NextPage<{ image: Asset; text: IText }> = ({
   image,
@@ -35,26 +35,26 @@ const AboutPage: NextPage<{ image: Asset; text: IText }> = ({
         exit={{ opacity: 0 }}
         className="container lg:w-1/2 relative"
       >
-        <div className="markdown-image">
-          <Image
-            src={`https:${url}`}
-            layout="responsive"
-            alt={title}
-            height={cfImage?.height}
-            width={cfImage?.width}
-          />
-        </div>
-        <ReactMarkdown className="markdown-content">
-          {content ? content : ""}
-        </ReactMarkdown>
+        <Image
+          src={`https:${url}`}
+          layout="responsive"
+          alt={title}
+          height={cfImage?.height}
+          width={cfImage?.width}
+          className="rounded-md"
+        />
+
+        <MarkdownRenderer content={content} />
       </motion.div>
     </>
   )
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const image = await contentful.asset("27qCsxISQkefL0kboUAaKM")
-  const text = await contentful.entry("7IyBU1ZmXouKamyq6h8afp")
+  const [image, text] = await Promise.all([
+    await contentful.asset("27qCsxISQkefL0kboUAaKM"),
+    await contentful.entry("7IyBU1ZmXouKamyq6h8afp"),
+  ])
 
   return {
     props: {

@@ -35,6 +35,10 @@ const navLinks = [
     name: "Contact",
     href: "/contact",
   },
+  {
+    name: "Dailies",
+    href: "/dailies",
+  },
 ]
 
 const Navigation: FC<{ open: boolean; setOpen: Function }> = ({
@@ -46,7 +50,7 @@ const Navigation: FC<{ open: boolean; setOpen: Function }> = ({
       initial={box.closed}
       animate={open ? "open" : "closed"}
       variants={box}
-      className="items-center justify-center text-sm flex shadow-inner bg-gray-700"
+      className="items-center justify-center text-sm flex shadow-inner bg-gray-300 dark:bg-gray-700"
       style={{ transformOrigin: "top" }}
     >
       {navLinks.map((link, index) => (
@@ -55,7 +59,7 @@ const Navigation: FC<{ open: boolean; setOpen: Function }> = ({
             variants={navLink}
             animate={open ? "open" : "closed"}
             onClick={() => setOpen(!open)}
-            className="dropdown-link transition-colors mx-3 text-white hover:underline"
+            className="dropdown-link transition-colors mx-3 dark:text-white hover:underline underline-offset-2 font-normal"
           >
             {link.name}
           </motion.a>

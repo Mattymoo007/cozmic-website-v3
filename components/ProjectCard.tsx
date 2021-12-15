@@ -1,5 +1,5 @@
 import ReactMarkdown from "react-markdown"
-import ResponsiveImage from "~/components/ResponsiveImage/ResponsiveImage"
+import ResponsiveImage from "~/components/ResponsiveImage"
 import Link from "next/link"
 import { FC } from "react"
 import { IProjectFields } from "~/types/contentful"
@@ -21,7 +21,7 @@ const ProjectCard: FC<IProjectFields> = ({
               tags.map(tag => (
                 <span
                   key={tag}
-                  className="text-gray-600 tag text-xs px-3 py-1 mr-2 mb-2 border border-purple-500 whitespace-nowrap dark:text-gray-100 rounded-full"
+                  className="text-xs font-normal px-3 py-1 mr-2 mb-2 border border-purple-500 whitespace-nowrap dark:text-gray-100 rounded-full"
                 >
                   # {tag}
                 </span>

@@ -4,21 +4,34 @@
 
 @layer base {
   body {
-    @apply font-roboto font-light;
+    @apply font-inter font-light;
+    @apply dark:text-white;
+    @apply bg-gray-100 dark:bg-gray-800;
   }
 }
 
 @layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-titillium font-normal;
+  }
+
   h1 {
-    @apply mb-4 font-montserrat;
-    font-weight: 400;
-    font-size: 2.5rem;
-    line-height: 1.2;
+    @apply text-4xl;
+  }
+
+  h2 {
+    @apply text-3xl;
+  }
+
+  h3 {
+    @apply text-2xl;
   }
 
   h4 {
-    @apply text-xl mb-3 font-montserrat;
-    font-weight: 500;
+    @apply text-xl mb-4 font-semibold tracking-wider;
   }
 }
 
@@ -56,13 +69,17 @@
     @apply bg-gray-50;
     box-shadow: inset 3px 3px 6px #d9d9d9, inset -3px -3px 6px #ffffff;
   }
-
-  .masonry-columns-4 {
-    columns: 4 250px;
-    column-gap: 1.5rem;
-  }
 }
 
-body {
-  @apply bg-gray-100 dark:bg-gray-800;
+::-webkit-scrollbar-track {
+  @apply bg-gray-200 dark:bg-gray-700;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  @apply bg-gray-400 dark:bg-gray-900;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-400 dark:bg-gray-900;
 }

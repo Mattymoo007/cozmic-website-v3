@@ -1,48 +1,26 @@
 import { GetStaticPaths, GetStaticProps } from "next"
-import { FC } from "react"
+import { FC, ReactElement } from "react"
 import { IProjectFields } from "~/types/contentful"
 import { contentful } from "~/utils/contentful-api"
-import Image from "next/image"
-import { BLOCKS } from "@contentful/rich-text-types"
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { motion } from "framer-motion"
+import RichTextRenderer from "~/components/RichTextRenderer"
+import Layout from "~/layouts/Layout"
 
-const Project: FC<IProjectFields> = props => {
-  const { copy } = props
-
-  const renderOptions = {
-    renderNode: {
-      [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
-        const isPriority = node.data.target.metadata.tags.some(
-          ({ sys: { id } }: any) => id.includes("priority")
-        )
-
-        return (
-          <div className="markdown-image">
-            <Image
-              src={`https:${node.data.target.fields.file.url}`}
-              height={node.data.target.fields.file.details.image.height}
-              width={node.data.target.fields.file.details.image.width}
-              alt={node.data.target.fields.description}
-              layout="responsive"
-              priority={isPriority}
-            />
-          </div>
-        )
-      },
-    },
-  }
-
+const Project: FC<IProjectFields> = ({ copy }) => {
   return (
     <motion.article
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="container relative lg:w-1/2 rich-text-content"
+      className="container relative lg:w-1/2 prose"
     >
-      {copy && documentToReactComponents(copy, renderOptions)}
+      <RichTextRenderer copy={copy} />
     </motion.article>
   )
+}
+
+Project.getLayout = function getLayout(page: ReactElement) {
+  return <Layout>{page}</Layout>
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {

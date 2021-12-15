@@ -1,5 +1,5 @@
 import Navbar from "~/components/Navbar/Navbar"
-import Footer from "~/components/Footer/Footer"
+import Footer from "~/components/Navbar/Footer"
 import { createContext, FC, useEffect, useState } from "react"
 import { getTheme, setTheme } from "~/utils/color-scheme"
 
@@ -40,9 +40,11 @@ const Layout: FC = ({ children }) => {
 
   return (
     <ThemeContext.Provider value={themeAppContext}>
-      <Navbar />
-      <main>{children}</main>
-      <Footer />
+      <div className="flex flex-col h-screen">
+        <Navbar />
+        <main className="flex-grow">{children}</main>
+        <Footer />
+      </div>
     </ThemeContext.Provider>
   )
 }

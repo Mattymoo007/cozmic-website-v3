@@ -1,5 +1,5 @@
-import DarkModeToggle from "~/components/DarkModeToggle/DarkModeToggle"
-import Navigation from "~/components/Navigation/Navigation"
+import DarkModeToggle from "~/components/Navbar/DarkModeToggle"
+import Navigation from "~/components/Navbar/Navigation"
 import Link from "next/link"
 import { useState } from "react"
 
@@ -24,14 +24,14 @@ const Navbar = () => {
           className="morphic-btn z-10 py-2 px-3 rounded"
           onClick={() => setOpen(!open)}
         >
-          <span className="uppercase text-xs mr-2 hidden md:inline-block font-montserrat font-normal ">
+          <span className="mr-2 mb-[2px] hidden md:inline-block font-mono font-normal">
             menu
           </span>
           <div className="hamburger h-3 w-4 flex flex-col justify-between">
             {[...Array(3)].map((x, i) => (
               <div
                 key={i}
-                className="border-t border-black dark:border-white"
+                className="border-t-[1.5px] border-black dark:border-white"
               ></div>
             ))}
           </div>

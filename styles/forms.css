@@ -15,7 +15,34 @@
     @apply flex flex-wrap -mx-2;
 
     label {
-      @apply px-2 mb-2;
+      @apply px-2 mb-4;
     }
+  }
+}
+
+.form-crypto {
+  label {
+    @apply dark:text-white font-medium block mb-1;
+  }
+
+  .form-input {
+    @apply first:mt-0 mt-5;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="email"] {
+    @apply w-full;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  select {
+    @apply px-4 py-[12px] text-sm block rounded-xl focus:border-fuchsia-500 bg-black/30 border focus:bg-black/40 focus:ring-0;
+  }
+
+  select option {
+    @apply my-3;
   }
 }

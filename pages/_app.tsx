@@ -1,13 +1,27 @@
 import "~/styles/index.css"
 
 import type { AppProps } from "next/app"
-import Layout from "~/layouts/Layout"
 import { DefaultSeo } from "next-seo"
 
 import { AnimatePresence } from "framer-motion"
 import Script from "next/script"
+import { ReactNode } from "react"
+import { NextPage } from "next"
+import Layout from "~/layouts/Layout"
 
-function MyApp({ Component, pageProps, router }: AppProps) {
+export type NextPageWithLayout<P = {}> = NextPage<P> & {
+  getLayout?: (page: ReactNode) => ReactNode
+}
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout
+}
+
+const defaultGetLayout = (page: ReactNode): ReactNode => <Layout>{page}</Layout>
+
+function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout ?? defaultGetLayout
+
   return (
     <>
       {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
@@ -35,11 +49,9 @@ function MyApp({ Component, pageProps, router }: AppProps) {
         }}
       />
 
-      <Layout>
-        <AnimatePresence exitBeforeEnter>
-          <Component {...pageProps} key={router.route} />
-        </AnimatePresence>
-      </Layout>
+      <AnimatePresence exitBeforeEnter>
+        {getLayout(<Component {...pageProps} key={router.route} />)}
+      </AnimatePresence>
     </>
   )
 }

@@ -2,7 +2,7 @@ import { motion } from "framer-motion"
 import { GetStaticProps, NextPage } from "next"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
-import ReactMarkdown from "react-markdown"
+import MarkdownRenderer from "~/components/MarkdownRenderer"
 import { contentful } from "~/utils/contentful-api"
 
 type FormData = {
@@ -53,7 +53,7 @@ const ContactPage: NextPage<{ text: string }> = ({ text }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="container flex flex-wrap items-center justify-center"
+      className="container flex flex-wrap items-center justify-center h-full"
     >
       <form
         onSubmit={onSubmit}
@@ -69,7 +69,7 @@ const ContactPage: NextPage<{ text: string }> = ({ text }) => {
           </label>
         </p>
 
-        <h2 className="text-2xl font-bold mb-4 dark:text-white">Hola @ me</h2>
+        <h2 className="text-2xl font-bold mb-4 dark:text-white">Hola @ me!</h2>
 
         <div className="form-row">
           <label className="w-full lg:w-1/2">
@@ -131,9 +131,10 @@ const ContactPage: NextPage<{ text: string }> = ({ text }) => {
       </form>
 
       <div className="lg:w-1/2 mt-5 flex items-center justify-center w-full">
-        <ReactMarkdown className="markdown-content morphic-shadow py-5 px-7 rounded-md w-full lg:w-auto">
-          {text ? text : ""}
-        </ReactMarkdown>
+        <MarkdownRenderer
+          className="morphic-shadow py-5 px-7 rounded-md w-full lg:w-auto"
+          content={text}
+        />
       </div>
     </motion.section>
   )
