@@ -1,10 +1,9 @@
 import { GetStaticPaths, GetStaticProps } from "next"
-import { FC, ReactElement } from "react"
+import { FC } from "react"
 import { IProjectFields } from "~/types/contentful"
 import { contentful } from "~/utils/contentful-api"
 import { motion } from "framer-motion"
 import RichTextRenderer from "~/components/RichTextRenderer"
-import Layout from "~/layouts/Layout"
 
 const Project: FC<IProjectFields> = ({ copy }) => {
   return (
@@ -17,10 +16,6 @@ const Project: FC<IProjectFields> = ({ copy }) => {
       <RichTextRenderer copy={copy} />
     </motion.article>
   )
-}
-
-Project.getLayout = function getLayout(page: ReactElement) {
-  return <Layout>{page}</Layout>
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
